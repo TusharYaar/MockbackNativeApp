@@ -5,8 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login, {loginOptions} from "../screens/Login";
 import LoginLoading from "../screens/LoginLoading";
 
-console.log(loginOptions);
-
 const LoginStack = createStackNavigator();
 
 export const LoginStackNavigator = () => {

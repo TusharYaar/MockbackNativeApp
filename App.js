@@ -1,15 +1,14 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+
 import { enableScreens } from "react-native-screens";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { NavigationContainer } from '@react-navigation/native';
-import thunk from "redux-thunk";
 
+import thunk from "redux-thunk";
 import userReducer from "./store/reducers/user";
 
-import {LoginStackNavigator} from "./navigators/StackNavigators"
+import AppChild from "./components/AppChild"
+
 enableScreens(true);
 
 export default function App() {
@@ -21,19 +20,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <StatusBar style="auto" />
-        <LoginStackNavigator/>
-        </NavigationContainer>
+     <AppChild />
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
