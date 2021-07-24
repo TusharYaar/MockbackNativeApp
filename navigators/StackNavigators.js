@@ -10,7 +10,7 @@ const LoginStack = createStackNavigator();
 export const LoginStackNavigator = () => {
   return (
     <LoginStack.Navigator>
-      <LoginStack.Screen name="Home" component={Login} options={loginOptions}/>
+      <LoginStack.Screen name="Login" component={Login} options={loginOptions}/>
       <LoginStack.Screen name="Loading" component={LoginLoading} options={loginOptions}/>
     </LoginStack.Navigator>
   );

@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {Title,TextInput } from "react-native-paper";
 
 import Button from "../components/Button"
-const Login = () => {
+const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -16,20 +16,10 @@ const Login = () => {
         setPassword(text);
     }
     const handleLogin = async () => {
-        setIsLoading(true);
-        try {
-            const {data} = await fetch('https://mockback.herokuapp.com/login', {
-                method: 'POST',
-                body: JSON.stringify({
-                    email: email,
-                    password: password
-                })
-            });
-            const {token} = await data.json(); 
-        } catch (e) {
-            setIsLoading(false);
-            alert(e);
-        }
+        props.navigation.navigate("Loading",{
+            email: "email",
+            password: "password"
+        });
     }
    
    
