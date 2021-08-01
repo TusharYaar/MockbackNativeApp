@@ -1,14 +1,20 @@
-import React, {useState} from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native'
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, Text, View, ImageBackground, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {Title,TextInput } from "react-native-paper";
+
 
 import Button from "../components/Button"
 const Login = (props) => {
     const {navigation, route} = props;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+
+
+    useEffect(() => {
+        if (route && route.params && route.params.error)
+            Alert.alert("Error",route.params.error);
+    },[route])
 
     const handleEmailChange = (text) => {
         setEmail(text);
@@ -18,8 +24,8 @@ const Login = (props) => {
     }
     const handleLogin = async () => {
         props.navigation.navigate("Loading",{
-            email: "email",
-            password: "password"
+            email: email,
+            password: password
         });
     }
    
@@ -37,7 +43,7 @@ const Login = (props) => {
             <View style={styles.login}>
                 <TextInput label="Email" value={email} onChangeText={handleEmailChange} style={styles.margin} />
                 <TextInput label="Password" value={password} onChangeText={handlePasswordChange} style={styles.margin} />
-                <Button onPress={handleLogin} disabled={isLoading} style={styles.margin}>Login</Button>
+                <Button onPress={handleLogin} style={styles.margin}>Login</Button>
             </View>
         </SafeAreaView>
     )

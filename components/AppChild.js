@@ -6,12 +6,17 @@ import { Provider as PaperProvider } from "react-native-paper";
 
 import { LoginStackNavigator } from "../navigators/StackNavigators";
 
+import {useSelector } from "react-redux";
+
+
 const AppChild = () => {
+  const user = useSelector(state => state.user);
   return (
     <PaperProvider>
         <StatusBar style="auto" />
       <NavigationContainer>
-        <LoginStackNavigator />
+
+        {(user.autoLogin || !user.email) && <LoginStackNavigator />}
       </NavigationContainer>
     </PaperProvider>
   );

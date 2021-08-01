@@ -1,10 +1,14 @@
 import {LOGIN, LOGOUT, NO_USER, AUTO_LOGIN} from "../actions/user";
 const initialState = {
+    firstName: "",
+    lastName: "",
+    maxMockspaces: 2,
+    maxRoutes: 4,
     accessToken: null,
     email: null,
     apiKey: null,
     autoLogin: true,
-    uid: null,
+    theme: "avacardo",
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -15,9 +19,6 @@ export default (state = initialState, { type, payload }) => {
         return {...initialState, autoLogin: false};
     case NO_USER: {
         return {...initialState, autoLogin: false};
-    }
-    case AUTO_LOGIN: {
-        return {...initialState, autoLogin: true};
     }
     default:
         return state
