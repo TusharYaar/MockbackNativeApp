@@ -5,6 +5,7 @@ import {Title,TextInput } from "react-native-paper";
 
 import Button from "../components/Button"
 const Login = (props) => {
+    const {navigation, route} = props;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);

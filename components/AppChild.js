@@ -9,8 +9,8 @@ import { LoginStackNavigator } from "../navigators/StackNavigators";
 const AppChild = () => {
   return (
     <PaperProvider>
-      <NavigationContainer>
         <StatusBar style="auto" />
+      <NavigationContainer>
         <LoginStackNavigator />
       </NavigationContainer>
     </PaperProvider>
