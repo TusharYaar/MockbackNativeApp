@@ -38,7 +38,7 @@ const Login = (props) => {
         if (response.ok) { 
             dispatch(loginUser(userData))
         }
-         else if (!response.ok) throw new Error(data.message)
+         else if (!response.ok) throw new Error(userData.message)
         } catch (err) {
             Alert.alert("Error",err.message);
             setIsLoading(false);
