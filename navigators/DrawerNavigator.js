@@ -4,15 +4,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from './CustomDrawer';
 
-import Login from "../screens/Login";
-import Routes from "../screens/Routes";
+// import TabNavigator from "./TabNavigator"
+
+import {MockspaceStackNavigator} from "./StackNavigators"
+
 const Drawer = createDrawerNavigator();
 
 
 const DrawerNavigator = (props) => {
     return (
-        <Drawer.Navigator drawerContent={props => <CustomDrawer {...props} />}>
-        <Drawer.Screen name="Feed" component={Routes}  />
+        <Drawer.Navigator>
+        <Drawer.Screen name="Feed" component={MockspaceStackNavigator}  />
       </Drawer.Navigator>
     )
 }
