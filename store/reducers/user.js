@@ -14,9 +14,9 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
     switch (type) {
     case LOGIN:
-        return({...payload})
-        // return {...state, ...payload, autoLogin: false};
-        // break;
+        return({...payload,autoLogin: false});
+    case AUTO_LOGIN:
+        return({...payload,autoLogin: false});
     case LOGOUT:
         return {...initialState, autoLogin: false};
     case NO_USER: {

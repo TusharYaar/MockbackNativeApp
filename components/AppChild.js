@@ -5,16 +5,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { useSelector } from "react-redux";
-
-import Login from "../screens/Login";
-import DrawerNavigator from "../navigators/DrawerNavigator";
-import Routes from "../screens/Routes";
-
 import AppNavigator from "../navigators/AppNavigator";
+
+import {useSelector} from "react-redux";
 
 const AppChild = () => {
 
+  const theme = useSelector(state => state.user.theme);
   return (
     <PaperProvider>
       <StatusBar style="auto" />
@@ -22,7 +19,6 @@ const AppChild = () => {
         <NavigationContainer>
           <AppNavigator />
         </NavigationContainer>
-
       </SafeAreaProvider>
     </PaperProvider>
   );
