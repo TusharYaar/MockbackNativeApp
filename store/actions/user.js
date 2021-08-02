@@ -6,7 +6,8 @@ export const NO_USER = "NO_USER";
 export const AUTO_LOGIN = "AUTO_LOGIN";
 export const loginUser = (payload) => {
   return async (dispatch) => {
-    await AsyncStorage.setItem("@user_details", JSON.stringify(payload));
+    // await AsyncStorage.setItem("@user_details", JSON.stringify(payload));
+    console.log(payload);
     dispatch({ type: LOGIN, payload });
   };
 };

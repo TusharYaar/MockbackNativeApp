@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useDispatch, useSelector } from "react-redux";
-import {loginUser} from "../store/actions/user";
+import {loginUser, autoLoginUser} from "../store/actions/user";
 
 
 const LoginLoading = ({ navigation, route }) => {
@@ -34,11 +34,11 @@ const LoginLoading = ({ navigation, route }) => {
           }),
         }
       );
+      if (!response.ok) throw new Error(data.message);
       const data = await response.json();
       const {firstName, lastName, email, maxRoutes, maxMockspaces, token, theme} = data;
-      dispatch(loginUser({firstName, lastName, email, maxRoutes, maxMockspaces, token, theme}));
       console.log(data);
-      if (!response.ok) throw new Error(data.message);
+      dispatch(loginUser({firstName, lastName, email, maxRoutes, maxMockspaces, token, theme}));
     } catch (err) {
       navigation.navigate("Login", { error: err.message });
     }
@@ -46,23 +46,38 @@ const LoginLoading = ({ navigation, route }) => {
 
 const handleAutoLogin = useCallback(async () => {
   try {
-    const user = await AsyncStorage.getItem('@user_details');
-    dispatch(loginUser(JSON.parse(user)));
+    const value = await AsyncStorage.getItem('@user_details');
+    console.log(value);
+    if(value === "null" || value === null) {
+      navigation.navigate("Login");
+    }
+    else {
+      console.log(value);
+      dispatch(autoLoginUser(JSON.parse(value)));
+    }
   } catch (err) {
       navigation.navigate("Login", { error: err.message });
   }  
-}, [dispatch])
+}, [dispatch,navigation])
 
-  useEffect(() => {
-    if(user.autoLogin)  handleAutoLogin();
-    else if (!user.autoLogin && !user.email) {
-      navigation.navigate("Login");
-      // console.log("Should call autoLogin");
-    }
-    else if (!params && !user.email)navigation.navigate("Login")
-    else if (params && params.email && params.password && !user.email) handleLogin()
+  // useEffect(() => {
+  //   if (user.autoLogin && !params) {
+  //     console.log("autoLogin");
+  //     handleAutoLogin();
+  //   }
+  //   else if (!user.autoLogin && !user.email){ 
+  //     console.log("No user");
+  //     navigation.navigate("Login") }   
+  //   else if (!params && !user.email) 
+  //   { console.log("no Params");
+  //     navigation.navigate("Login")
+  //   }
+  //   else if (!!params && params.email && params.password && !user.email){
+  //     console.log("trying login");
+  //     handleLogin()
+  //     }
 
-  }, [handleAutoLogin,handleLogin, params, navigation, user]);
+  // }, [handleAutoLogin,handleLogin, params, navigation, user]);
 
   return (
     <View style={styles.screen}>
@@ -75,7 +90,8 @@ const handleAutoLogin = useCallback(async () => {
         source={require("../assets/lotties/running-server.json")}
       />
       <Text>First call to the server may take some time. Please wait</Text>
-      <Button onPress={()=> {navigation.navigate("Login")} }>Cancel</Button>
+      <Button onPress={()=> console.log("Pressed") }>Cancel</Button>
+      <Button onPress={handleAutoLogin}>Pressed Button</Button>
     </View>
   );
 };
