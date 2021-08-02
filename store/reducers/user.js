@@ -4,23 +4,26 @@ const initialState = {
     lastName: "",
     maxMockspaces: 2,
     maxRoutes: 4,
-    accessToken: null,
+    token: null,
     email: null,
-    apiKey: null,
     autoLogin: true,
     theme: "avacardo",
 }
 
+
 export default (state = initialState, { type, payload }) => {
     switch (type) {
     case LOGIN:
-        return {...payload, autoLogin: false }
+        return({...payload})
+        // return {...state, ...payload, autoLogin: false};
+        // break;
     case LOGOUT:
         return {...initialState, autoLogin: false};
     case NO_USER: {
         return {...initialState, autoLogin: false};
     }
     default:
-        return state
+        return state;
     }
 }
+

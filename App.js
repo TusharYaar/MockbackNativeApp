@@ -11,12 +11,12 @@ import AppChild from "./components/AppChild"
 
 enableScreens(true);
 
-export default function App() {
+const App = ()=> {
   const rootReducer = combineReducers({
     user: userReducer,
   });
 
-  const store = createStore(rootReducer, applyMiddleware(thunk));
+  const store = createStore(rootReducer,applyMiddleware(thunk));
 
   return (
     <Provider store={store}>
@@ -24,3 +24,4 @@ export default function App() {
     </Provider>
   );
 }
+export default App;

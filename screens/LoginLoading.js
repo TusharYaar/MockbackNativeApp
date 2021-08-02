@@ -18,67 +18,6 @@ const LoginLoading = ({ navigation, route }) => {
 
 
   //Login using email and Password
-  const handleLogin = useCallback(async () => {
-    try {
-      const response = await fetch(
-        "https://mockback.herokuapp.com/auth/login",
-        {
-          method: "POST",
-          mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-          body: JSON.stringify({
-            email: params.email,
-            password: params.password,
-          }),
-        }
-      );
-      if (!response.ok) throw new Error(data.message);
-      const data = await response.json();
-      const {firstName, lastName, email, maxRoutes, maxMockspaces, token, theme} = data;
-      console.log(data);
-      dispatch(loginUser({firstName, lastName, email, maxRoutes, maxMockspaces, token, theme}));
-    } catch (err) {
-      navigation.navigate("Login", { error: err.message });
-    }
-  }, [params,dispatch]);
-
-const handleAutoLogin = useCallback(async () => {
-  try {
-    const value = await AsyncStorage.getItem('@user_details');
-    console.log(value);
-    if(value === "null" || value === null) {
-      navigation.navigate("Login");
-    }
-    else {
-      console.log(value);
-      dispatch(autoLoginUser(JSON.parse(value)));
-    }
-  } catch (err) {
-      navigation.navigate("Login", { error: err.message });
-  }  
-}, [dispatch,navigation])
-
-  // useEffect(() => {
-  //   if (user.autoLogin && !params) {
-  //     console.log("autoLogin");
-  //     handleAutoLogin();
-  //   }
-  //   else if (!user.autoLogin && !user.email){ 
-  //     console.log("No user");
-  //     navigation.navigate("Login") }   
-  //   else if (!params && !user.email) 
-  //   { console.log("no Params");
-  //     navigation.navigate("Login")
-  //   }
-  //   else if (!!params && params.email && params.password && !user.email){
-  //     console.log("trying login");
-  //     handleLogin()
-  //     }
-
-  // }, [handleAutoLogin,handleLogin, params, navigation, user]);
-
   return (
     <View style={styles.screen}>
       <LottieView
@@ -90,8 +29,8 @@ const handleAutoLogin = useCallback(async () => {
         source={require("../assets/lotties/running-server.json")}
       />
       <Text>First call to the server may take some time. Please wait</Text>
-      <Button onPress={()=> console.log("Pressed") }>Cancel</Button>
-      <Button onPress={handleAutoLogin}>Pressed Button</Button>
+      <Button onPress={()=> navigation.navigate("Login") }>Cancel</Button>
+      {/* <Button onPress={}>Pressed Button</Button> */}
     </View>
   );
 };

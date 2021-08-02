@@ -7,19 +7,22 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useSelector } from "react-redux";
 
-import { LoginStackNavigator } from "../navigators/StackNavigators";
+import Login from "../screens/Login";
 import DrawerNavigator from "../navigators/DrawerNavigator";
+import Routes from "../screens/Routes";
+
+import AppNavigator from "../navigators/AppNavigator";
 
 const AppChild = () => {
-  const user = useSelector((state) => state.user);
+
   return (
     <PaperProvider>
       <StatusBar style="auto" />
       <SafeAreaProvider>
         <NavigationContainer>
-          {!user.autoLogin && user.email && <DrawerNavigator />}
-          {(user.autoLogin || !user.email) && <LoginStackNavigator />}
+          <AppNavigator />
         </NavigationContainer>
+
       </SafeAreaProvider>
     </PaperProvider>
   );
