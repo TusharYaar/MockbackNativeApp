@@ -1,14 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet,  View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Avatar, Button,Headline  } from 'react-native-paper';
+import { Avatar, Button,Headline, Drawer, Caption, Subheading   } from 'react-native-paper';
 
 import {
     DrawerContentScrollView,
     DrawerItemList,
   } from '@react-navigation/drawer';
-
 
 
 import {useSelector,useDispatch} from 'react-redux';
@@ -27,18 +26,18 @@ const CustomDrawer = (props) => {
     const mockspacesData = useSelector(state => state.mockspaces);
     return (
         <SafeAreaView {...props} style={styles.screen}>
-            <View style={{backgroundColor: "red"}}>
+            <View>
                 <View style={styles.userDetails}>
                 <Avatar.Icon size={36} icon="account" />
-                    <Headline  style={styles.userName}>{user.firstName + " " + user.lastName}</Headline >
+                    <View style={styles.userDetailsText}>
+                    <Headline>{user.firstName + " " + user.lastName}</Headline >
+                    <Caption>{user.email}</Caption>
+                    </View>
                 </View>
-            <Text>{user.email}</Text>
-            <View>
-                <Text>{mockspacesData.mockspaces.length} Mockspaces</Text>
-            </View>
+                <Subheading style={styles.mockspacesNumber}>{mockspacesData.mockspaces.length} Mockspace/s</Subheading >
             </View>
             <DrawerContentScrollView {...props}>
-            <View style={styles.flex}>            
+            <View style={styles.flex}>              
                 <DrawerItemList {...props} />
             </View>
             </DrawerContentScrollView>
@@ -62,7 +61,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10
     },
-    userName: {
+    userDetailsText: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    mockspacesNumber: {
         padding: 10,
     }
 })

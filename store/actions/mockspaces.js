@@ -1,6 +1,15 @@
 export const SET_MOCKSPACES = "SET_MOCKSPACES";
 export const UPDATE_MOCKSPACE = "UPDATE_MOCKSPACE";
 export const SET_ERROR = 'SET_ERROR';
+export const SET_CURRENT_MOCKSPACE = 'SET_CURRENT_MOCKSPACE';
+
+export const setCurrentMockspace = (payload) => ({
+  type: SET_CURRENT_MOCKSPACE,
+  payload
+})
+
+
+
 export const setMockspaces = (payload) => ({
   type: SET_MOCKSPACES,
   payload,
