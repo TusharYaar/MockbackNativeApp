@@ -15,10 +15,10 @@ export const loginUser = (payload) => {
 
 export const autoLoginUser = (payload) =>    ({ type: AUTO_LOGIN, payload });
 
-// export const logoutUser = () => (dispatch) => {
-//   dispatch({ type: LOGOUT });
-//   return AsyncStorage.removeItem("@user_details");
-// };
+export const logoutUser = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+  return AsyncStorage.removeItem("@user_details");
+};
 
 export const noUser = () => ({
   type: NO_USER,

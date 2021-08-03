@@ -7,14 +7,16 @@ import CustomDrawer from './CustomDrawer';
 // import TabNavigator from "./TabNavigator"
 
 import {MockspaceStackNavigator} from "./StackNavigators"
+import SettingScreen from '../screens/SettingScreen';
 
 const Drawer = createDrawerNavigator();
 
 
 const DrawerNavigator = (props) => {
     return (
-        <Drawer.Navigator>
+        <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />} >
         <Drawer.Screen name="Feed" component={MockspaceStackNavigator}  />
+        <Drawer.Screen name="Settings" component={SettingScreen}  />
       </Drawer.Navigator>
     )
 }
