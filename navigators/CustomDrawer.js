@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import Button from '../components/Button';
+import { Avatar, Button,Headline  } from 'react-native-paper';
+
 import {
     DrawerContentScrollView,
     DrawerItemList,
@@ -23,16 +24,26 @@ const CustomDrawer = (props) => {
     }
 
     const user = useSelector(state => state.user);
+    const mockspacesData = useSelector(state => state.mockspaces);
     return (
-        <View {...props} style={styles.screen}>
+        <SafeAreaView {...props} style={styles.screen}>
+            <View style={{backgroundColor: "red"}}>
+                <View style={styles.userDetails}>
+                <Avatar.Icon size={36} icon="account" />
+                    <Headline  style={styles.userName}>{user.firstName + " " + user.lastName}</Headline >
+                </View>
+            <Text>{user.email}</Text>
+            <View>
+                <Text>{mockspacesData.mockspaces.length} Mockspaces</Text>
+            </View>
+            </View>
             <DrawerContentScrollView {...props}>
-            <Text>Logged In user: {user.email}</Text>
             <View style={styles.flex}>            
                 <DrawerItemList {...props} />
             </View>
             </DrawerContentScrollView>
-            <Button onPress={handleLogoutBtnClick}>Logout</Button>
-        </View>
+            <Button onPress={handleLogoutBtnClick} icon="logout-variant">Logout</Button>
+        </SafeAreaView>
 
     )
 }
@@ -45,5 +56,13 @@ const styles = StyleSheet.create({
     },
     flex: {
         flex: 1,
+    },
+    userDetails: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10
+    },
+    userName: {
+        padding: 10,
     }
 })

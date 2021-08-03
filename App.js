@@ -6,6 +6,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 
 import thunk from "redux-thunk";
 import userReducer from "./store/reducers/user";
+import mockspacesReducer from "./store/reducers/mockspaces";
 
 import { 
   useFonts,
@@ -40,6 +41,7 @@ const App = ()=> {
 
   const rootReducer = combineReducers({
     user: userReducer,
+    mockspaces: mockspacesReducer,
   });
 
   const store = createStore(rootReducer,applyMiddleware(thunk));
