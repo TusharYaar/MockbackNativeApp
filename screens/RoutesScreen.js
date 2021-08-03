@@ -1,18 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet,FlatList} from 'react-native'
 
 import {useSelector} from 'react-redux';
+
+import RouteCard from "../components/RouteCard";
 
 
 const Routes = () => {
 
     const routes = useSelector(state => state.mockspaces.currentMockspace.routes);
-    console.log(routes);
-
     return (
-        <View>
-            <Text>Routes</Text>
-        </View>
+        <FlatList data={routes} keyExtractor={item => item._id} renderItem = {({item}) => <RouteCard route={item} /> } />
     )
 }
 
