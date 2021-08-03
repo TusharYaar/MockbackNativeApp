@@ -6,12 +6,13 @@ import { Paragraph } from 'react-native-paper';
 
 import Button from '../components/Button';
 
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import {fetchMockspaces} from "../store/actions/mockspaces"
 
 const NoMockspaceScreen = () => {
     const animation = useRef(null);
     const dispatch = useDispatch();
+    const error = useSelector(state => state.mockspaces.error);
 
     const handleRetry = () => {
       dispatch(fetchMockspaces());
@@ -28,8 +29,9 @@ const NoMockspaceScreen = () => {
         loop={false}
         source={require("../assets/lotties/no-result.json")}
         />
-        <Paragraph style={styles.text}>You don't have any mockspaces</Paragraph>
-        <Paragraph style={styles.text}>Head to website to create one</Paragraph>
+        {error ? <Paragraph style={styles.text}>{error}</Paragraph> :
+        <Paragraph style={styles.text}>You don't have any mockspaces. Head to website to create one</Paragraph>
+      }
         <Button onPress={handleRetry}>Retry</Button>
         </SafeAreaView>
     )
@@ -43,6 +45,7 @@ const styles = StyleSheet.create({
     },
     text: {
       textAlign: 'center',
+      marginVertical: 15,
     }
   
   });
