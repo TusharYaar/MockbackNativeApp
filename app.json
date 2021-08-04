@@ -2,8 +2,9 @@
   "expo": {
     "name": "Mockback: Companion App",
     "slug": "mockback",
-    "version": "1.0.0",
-    "orientation": "portrait",
+    "scheme": "mockback",
+    "version": "0.1.0",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
@@ -25,7 +26,8 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.tusharyaar.mockback",
-      "versionCode": 1
+      "versionCode": 1,
+      "permissions":[]
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -7,6 +7,8 @@ import {useDispatch }from "react-redux";
 import {setCurrentMockspace} from "../store/actions/mockspaces";
 
 import TabNavigator from "./TabNavigator"
+import RouteDetailScreen from '../screens/RouteDetailScreen';
+import RouteHistoryDetailScreen from '../screens/RouteHistoryDetailScreen';
 const MockspaceStack = createStackNavigator();
 
 export const MockspaceStackNavigator = ({mockspaceId, mockspaceName}) => {
@@ -27,6 +29,9 @@ export const MockspaceStackNavigator = ({mockspaceId, mockspaceName}) => {
   return (
     <MockspaceStack.Navigator >
       <MockspaceStack.Screen name="Mockspace" component={TabNavigator} options={screenOptions}/>
+      <MockspaceStack.Screen name="RouteDetail" component={RouteDetailScreen}/>
+      <MockspaceStack.Screen name="RouteHistoryDetail" component={RouteHistoryDetailScreen}/>
+
     </MockspaceStack.Navigator>
   );
 }
