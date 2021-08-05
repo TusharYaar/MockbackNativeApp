@@ -13,7 +13,7 @@ import {
   WorkSans_100Thin,
   WorkSans_300Light,
   WorkSans_400Regular,
-  WorkSans_700Bold,
+  WorkSans_500Medium,
 } from '@expo-google-fonts/work-sans';
 
 import AppChild from "./components/AppChild";
@@ -25,7 +25,7 @@ const App = ()=> {
     WorkSans_100Thin,
     WorkSans_300Light,
     WorkSans_400Regular,
-    WorkSans_700Bold,
+    WorkSans_500Medium,
 
   });
 

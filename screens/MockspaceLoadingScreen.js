@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
 import {fetchMockspaces} from "../store/actions/mockspaces"
 
-import { Paragraph } from 'react-native-paper';
+import { Caption } from 'react-native-paper';
 
 const MockspaceLoadingScreen = () => {
   const animation = useRef(null);
@@ -27,7 +27,7 @@ useEffect(() => {
         autoPlay={true}
         source={require("../assets/lotties/running-server.json")}
       />
-      <Paragraph style={styles.text}>First call to the server may take some time. Please wait</Paragraph>
+      <Caption style={styles.text}>First call to the server may take some time. Please wait</Caption>
     </SafeAreaView>
   );
 };
