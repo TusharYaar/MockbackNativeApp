@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet,  View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Avatar, Button,Headline, Drawer, Caption, Subheading   } from 'react-native-paper';
+import { Avatar, Button,Headline, Caption, Subheading   } from 'react-native-paper';
 
 import {
     DrawerContentScrollView,
@@ -17,7 +17,6 @@ import {logoutUser} from "../store/actions/user"
 const CustomDrawer = (props) => {
 
     const dispatch = useDispatch();
-
     const handleLogoutBtnClick = () => {
         dispatch(logoutUser());
     }
@@ -30,14 +29,14 @@ const CustomDrawer = (props) => {
                 <View style={styles.userDetails}>
                 <Avatar.Icon size={36} icon="account" />
                     <View style={styles.userDetailsText}>
-                    <Headline>{user.firstName + " " + user.lastName}</Headline >
+                    <Headline>{user.firstName + " " + user.lastName}</Headline>
                     <Caption>{user.email}</Caption>
                     </View>
                 </View>
                 <Subheading style={styles.mockspacesNumber}>{mockspacesData.mockspaces.length} Mockspace/s</Subheading >
             </View>
             <DrawerContentScrollView {...props}>
-            <View style={styles.flex}>              
+            <View style={styles.flex}>          
                 <DrawerItemList {...props} />
             </View>
             </DrawerContentScrollView>
