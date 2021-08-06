@@ -1,7 +1,13 @@
+import {fetchMockspaceData} from "../../functions/functions";
+
+
 export const SET_MOCKSPACES = "SET_MOCKSPACES";
-export const UPDATE_MOCKSPACE = "UPDATE_MOCKSPACE";
+export const UPDATE_MOCKSPACES = "UPDATE_MOCKSPACES";
 export const SET_ERROR = 'SET_ERROR';
 export const SET_CURRENT_MOCKSPACE = 'SET_CURRENT_MOCKSPACE';
+
+
+
 
 export const setCurrentMockspace = (payload) => ({
   type: SET_CURRENT_MOCKSPACE,
@@ -15,19 +21,11 @@ export const setMockspaces = (payload) => ({
   payload,
 });
 
-export const fetchMockspaces = (payload) => {
+export const fetchMockspaces = () => {
   return async (dispatch, getState) => {
     const { user } = getState();
     try {
-      const req = await fetch(`https://mockback.herokuapp.com/userdata`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
-      const data = await req.json();
+      const data = await fetchMockspaceData(user.token);
       dispatch({
         type: SET_MOCKSPACES,
         payload: data.mockspaces,
@@ -37,3 +35,8 @@ export const fetchMockspaces = (payload) => {
     }
   };
 };
+
+export const updateMockspaces = (payload) => ({
+  type: UPDATE_MOCKSPACES,
+  payload
+})

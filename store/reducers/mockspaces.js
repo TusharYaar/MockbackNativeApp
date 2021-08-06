@@ -1,6 +1,7 @@
 import {
   SET_MOCKSPACES,
   SET_ERROR,
+  UPDATE_MOCKSPACES,
   SET_CURRENT_MOCKSPACE,
 } from "../actions/mockspaces";
 const initialState = {
@@ -27,7 +28,12 @@ export default (state = initialState, { type, payload }) => {
           (space) => space._id === payload
         ),
       };
-
+    case UPDATE_MOCKSPACES:
+      return {
+        ...state,
+        mockspaces: [],
+        loaded: false,
+      }
     default:
       return state;
   }

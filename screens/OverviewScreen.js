@@ -1,20 +1,22 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 
-import { Title, Paragraph, Caption } from "react-native-paper";
+import { Title, Paragraph, Caption, Button } from "react-native-paper";
 
 import Card from "../components/Card";
 import Accordion from "../components/Accordion";
 
 import { ACCESSLEVEL } from "../data/mappings";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { useTheme } from '@react-navigation/native';
 
-
+import { updateMockspaces } from "../store/actions/mockspaces";
 const OverviewScreen = () => {
   const mockspace = useSelector((state) => state.mockspaces.currentMockspace);
   const userEmail = useSelector((state) => state.user.email);
+  const dispatch = useDispatch();
+  
   const {colors} = useTheme();
   if (!mockspace._id) {
     return <View />;

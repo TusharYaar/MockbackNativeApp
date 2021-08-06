@@ -18,10 +18,10 @@ export default themes = [
     "darkBlue",
     "When the sky is falling down",
     true,
-    "#15192F",
-    "#096344",
+    "#15192f",
+    "#b33f40",
     "#121212",
     "#1E1E1E",
-    "rgb(229, 229, 231)"
+    "#fff"
   ),
 ];
