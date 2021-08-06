@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableNativeFeedback } from "react-native";
 
+import { useTheme } from '@react-navigation/native';
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Accordion = (props) => {
   const [expand, setExpand] = useState(false);
+  const {colors} = useTheme();
   const toggleAccordion = () => {
     setExpand(!expand);
   };
 
   return (
-    <View style={[styles.accordionContainer,props.style]}>
+    <View style={[styles.accordionContainer,props.style, {backgroundColor: colors.surface}]}>
       <TouchableNativeFeedback onPress={toggleAccordion}>
-        <View style={styles.accordion}>
+        <View style={[styles.accordion,{backgroundColor: colors.surface}]}>
           <View style={styles.header}>
             <View style={styles.title}>
               <MaterialCommunityIcons
@@ -21,12 +24,12 @@ const Accordion = (props) => {
                 size={24}
                 color={props.color ? props.color : "gray"}
               />
-              <Text style={styles.titleText}>{props.title}</Text>
+              <Text style={[styles.titleText,{color: colors.text}]}>{props.title}</Text>
             </View>
             <MaterialCommunityIcons
               name={expand ? "menu-up" : "menu-down"}
               size={24}
-              color="black"
+              color={ colors.text}
             />
           </View>
           {expand ? <View style={styles.body}>{props.children}</View> : null}
@@ -43,12 +46,13 @@ const styles = StyleSheet.create({
   accordionContainer: {
     borderRadius: 5,
     overflow: "hidden",
+    elevation: 2,
   },
   accordion: {
     padding: 20,
     backgroundColor: "white",
-    borderRadius: 5,
-    elevation: 1,
+    borderRadius: 4,
+    
   },
   header: {
     flexDirection: "row",

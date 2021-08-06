@@ -20,17 +20,17 @@ const TabNavigator = () => {
       <Tab.Screen
         name="Overview"
         component={OverviewScreen}
-        options={tabOption("Overview")}
+        options={tabOption("Overview",theme)}
       />
       <Tab.Screen
         name="Routes"
         component={RoutesScreen}
-        options={tabOption("Routes")}
+        options={tabOption("Routes",theme)}
       />
       <Tab.Screen
         name="History"
         component={RoutesHistoryScreen}
-        options={tabOption("History")}
+        options={tabOption("History",theme)}
       />
     </Tab.Navigator>
   );
@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
 
 const tabBarOptions = (theme) => ({
   indicatorStyle: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.accent,
   },
 });
 
 const tabOption = (route,theme=null) => ({
   tabBarLabel: ({ focused }) => (
-    <Text style={focused ? styles.focusedTab : null}>
+    <Text style={focused ? {color: theme.colors.accent} : null}>
       {route.toUpperCase()}
     </Text>
   ),

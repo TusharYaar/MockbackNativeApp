@@ -1,6 +1,6 @@
 import React,{useEffect}  from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigationState  } from '@react-navigation/native';
+import { useNavigationState, useTheme } from '@react-navigation/native';
 
 import {IconButton} from 'react-native-paper';
 
@@ -20,6 +20,7 @@ const AuthStack = createStackNavigator();
 
 
 export const MockspaceStackNavigator = ({ mockspaceName}) => {
+  const {colors} = useTheme();
   const currentMockspaceId = useSelector(state => state.mockspaces.currentMockspaceId);
   const dispatch = useDispatch();
   const state = useNavigationState(state => state);
@@ -35,8 +36,11 @@ export const MockspaceStackNavigator = ({ mockspaceName}) => {
   const screenOptions = ({navigation}) => ({
     title: mockspaceName,
     headerLeft: () => (
-      <IconButton icon="menu" size={24} color="white" onPress={()=> navigation.toggleDrawer() } />
+      <IconButton icon="menu" size={24} color={colors.text} onPress={()=> navigation.toggleDrawer() } />
     ),
+    headerStyle: {
+    backgroundColor: colors.primary,
+    }
   })
   
   return (
@@ -49,7 +53,6 @@ export const MockspaceStackNavigator = ({ mockspaceName}) => {
 }
 
 export const AuthStackNavigator = () => {
-
   return (
     <AuthStack.Navigator >
       <AuthStack.Screen name="Login" component={Login}/>

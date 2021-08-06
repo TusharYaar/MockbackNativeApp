@@ -1,23 +1,23 @@
 export default class Theme {
-  constructor(name, label,description, isDark) {
+  constructor(name, label,description, isDark, primary, secondary, background, paper,text) {
     this.name = name;
     this.label = label;
     this.description = description;
     this.dark = isDark;
     this.colors = {
-      accent: "#03dac6",
-      backdrop: "rgba(0, 0, 0, 0.5)",
-      background: "rgb(1, 1, 1)",
+      accent: secondary,
+      backdrop: secondary,
+      background, //router Background
       border: "rgb(39, 39, 41)",
-      card: "rgb(18, 18, 18)",
+      card: paper, 
       disabled: "rgba(255, 255, 255, 0.38)",
       error: "#CF6679",
       notification: "rgb(255, 69, 58)",
-      onSurface: "#FFFFFF",
-      placeholder: "rgba(255, 255, 255, 0.54)",
-      primary: "rgb(10, 132, 255)",
-      surface: "#121212",
-      text: "rgb(229, 229, 231)",
+      onSurface: primary,
+      placeholder: text,
+      primary,
+      surface: paper, //react-native-paper
+      text,  //router text
     };
     (this.mode = "adaptive"),
       (this.roundness = 4),

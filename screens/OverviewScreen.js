@@ -6,12 +6,14 @@ import { Title, Card, Paragraph, Caption } from "react-native-paper";
 import Accordion from "../components/Accordion";
 
 import { ACCESSLEVEL } from "../data/mappings";
-
 import { useSelector } from "react-redux";
+
+import { useTheme } from '@react-navigation/native';
+
 const OverviewScreen = () => {
   const mockspace = useSelector((state) => state.mockspaces.currentMockspace);
   const userEmail = useSelector((state) => state.user.email);
-
+  const {colors} = useTheme();
   if (!mockspace._id) {
     return <View />;
   }
@@ -26,7 +28,7 @@ const OverviewScreen = () => {
   ));
   return (
     <ScrollView style={styles.screen}>
-      <Text style={styles.title}> {mockspace.mockspaceName} </Text>
+      <Text style={[styles.title, {color: colors.text}]}> {mockspace.mockspaceName} </Text>
       <View style={styles.cardContainer}>
         <Card style={styles.card}>
           <Card.Content>
