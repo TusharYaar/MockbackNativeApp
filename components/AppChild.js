@@ -9,14 +9,15 @@ import AppNavigator from "../navigators/AppNavigator";
 
 import {useSelector} from "react-redux";
 
+import Themes from "../themes/index";
 const AppChild = () => {
-
-  const theme = useSelector(state => state.user.theme);
+  const theme = Themes[0];
+  const currentTheme = useSelector(state => state.user.theme);
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <StatusBar style="auto" />
       <SafeAreaProvider>
-        <NavigationContainer>
+        <NavigationContainer theme={theme}>
           <AppNavigator />
         </NavigationContainer>
       </SafeAreaProvider>

@@ -1,7 +1,8 @@
-export default class theme {
-  constructor(name, label, isDark) {
+export default class Theme {
+  constructor(name, label,description, isDark) {
     this.name = name;
     this.label = label;
+    this.description = description;
     this.dark = isDark;
     this.colors = {
       accent: "#03dac6",
@@ -25,19 +26,19 @@ export default class theme {
       });
     this.fonts = {
       light: {
-        fontFamily: "sans-serif-light",
+        fontFamily: "WorkSans_300Light",
         fontWeight: "normal",
       },
       medium: {
-        fontFamily: "sans-serif-medium",
+        fontFamily: "WorkSans_500Medium",
         fontWeight: "normal",
       },
       regular: {
-        fontFamily: "sans-serif",
+        fontFamily: "WorkSans_400Regular",
         fontWeight: "normal",
       },
       thin: {
-        fontFamily: "sans-serif-thin",
+        fontFamily: "WorkSans_100Thin",
         fontWeight: "normal",
       },
     };

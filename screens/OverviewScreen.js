@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 import { Title, Card, Paragraph, Caption } from "react-native-paper";
@@ -42,7 +42,7 @@ const OverviewScreen = () => {
           </Card.Content>
         </Card>
       </View>
-      <Accordion title="Acess Details" icon="account-group">
+      <Accordion title="Acess Details" icon="account-group" style={styles.accordion}>
         {accessDetails}
       </Accordion>
     </ScrollView>
@@ -84,5 +84,8 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: "#00b0ff",
     marginRight: 5,
+  },
+  accordion: {
+    marginVertical: 10,
   }
 });

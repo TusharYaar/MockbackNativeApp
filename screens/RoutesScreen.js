@@ -10,10 +10,15 @@ const Routes = () => {
 
     const routes = useSelector(state => state.mockspaces.currentMockspace.routes);
     return (
-        <FlatList data={routes} keyExtractor={item => item._id} renderItem = {({item}) => <RouteCard route={item} /> } />
+        <FlatList style={styles.screen} data={routes} keyExtractor={item => item._id} renderItem = {({item}) => <RouteCard route={item} /> } />
     )
 }
 
 export default Routes
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    screen: {
+        paddingVertical: 5,
+        paddingHorizontal:10,
+    }
+})

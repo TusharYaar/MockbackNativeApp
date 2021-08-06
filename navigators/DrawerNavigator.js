@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 import { MockspaceStackNavigator } from "./StackNavigators";
 import SettingScreen from "../screens/SettingScreen";
-
+import { Text } from "react-native-paper";
 
 const Drawer = createDrawerNavigator();
 
@@ -22,14 +22,22 @@ const DrawerNavigator = (props) => {
   else if (mockspaces.mockspaces.length === 0) return <NoMockspaceScreen />;
 
   const mockspaceDrawerItems = mockspaces.mockspaces.map((space) => (
-    <Drawer.Screen name={space.mockspaceName} key={space._id} initialParams={{ mockspaceId: space._id }}>
+    <Drawer.Screen
+      name={space.mockspaceName}
+      key={space._id}
+      initialParams={{ mockspaceId: space._id }}
+      options={{
+        drawerLabel: ({ color }) => (
+          <Text style={{ color }}>{space.mockspaceName}</Text>
+        ),
+      }}
+    >
       {(props) => (
         <MockspaceStackNavigator
           {...props}
           mockspaceName={space.mockspaceName}
           mockspaceId={space._id}
         />
-        // console.log(props)
       )}
     </Drawer.Screen>
   ));
