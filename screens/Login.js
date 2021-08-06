@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ImageBackground, Alert } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Alert,ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, IconButton, Paragraph } from "react-native-paper";
 

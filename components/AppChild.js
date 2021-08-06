@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { StatusBar } from "expo-status-bar";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -11,13 +11,20 @@ import {useSelector} from "react-redux";
 
 import Themes from "../data/themes";
 const AppChild = () => {
-  const theme = Themes[1];
+  const[appliedTheme,setAppliedTheme] = useState(Themes[1]);
   const currentTheme = useSelector(state => state.user.theme);
+
+  useEffect(() => {
+    const index = Themes.findIndex(t => t.label === currentTheme);
+    setAppliedTheme(Themes[index]);
+
+  },[currentTheme]);
+
   return (
-    <PaperProvider theme={theme}>
-      <StatusBar style={theme.dark ? "light": "dark"} />
+    <PaperProvider theme={appliedTheme}>
+      <StatusBar style={appliedTheme.dark ? "light": "dark"} />
       <SafeAreaProvider>
-        <NavigationContainer theme={theme}>
+        <NavigationContainer theme={appliedTheme}>
           <AppNavigator />
         </NavigationContainer>
       </SafeAreaProvider>

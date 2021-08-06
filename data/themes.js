@@ -24,4 +24,25 @@ export default themes = [
     "#1E1E1E",
     "#fff"
   ),
+  new Theme(
+    "Blue Light Theme",
+    "avacardo",
+    "When the sky is falling down",
+    false,
+    "#3f51b5",
+    "#1b5e20",
+    "#fafafa",
+    "#fff",
+    "rgba(0, 0, 0, 0.87)"
+  ),  new Theme(
+    "Blue Light Theme",
+    "lightB2lue",
+    "When the sky is falling down",
+    false,
+    "#3f51b5",
+    "#1b5e20",
+    "#fafafa",
+    "#fff",
+    "rgba(0, 0, 0, 0.87)"
+  ),
 ];

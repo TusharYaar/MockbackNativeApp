@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT, NO_USER, AUTO_LOGIN} from "../actions/user";
+import {LOGIN, LOGOUT, NO_USER, AUTO_LOGIN,UPDATE_THEME} from "../actions/user";
 const initialState = {
     firstName: "",
     lastName: "",
@@ -22,6 +22,8 @@ export default (state = initialState, { type, payload }) => {
     case NO_USER: {
         return {...initialState, autoLogin: false};
     }
+    case UPDATE_THEME:
+        return {...state, theme: payload};
     default:
         return state;
     }

@@ -13,7 +13,7 @@ import RouteHistoryDetailScreen from '../screens/RouteHistoryDetailScreen';
 import Login from '../screens/Login';
 import SignupScreen from '../screens/SignupScreen';
 import SettingScreen from "../screens/SettingScreen";
-
+import ThemesScreen from "../screens/ThemesScreen";
 
 const MockspaceStack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -80,6 +80,7 @@ export const SettingsStackNavigator = () => {
   return (
     <SettingsStack.Navigator >
       <SettingsStack.Screen name="Setting" component={SettingScreen} options={screenOptions}/>
+      <SettingsStack.Screen name="Themes" component={ThemesScreen}/>
     </SettingsStack.Navigator>
   );
 }

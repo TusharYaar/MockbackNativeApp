@@ -9,6 +9,7 @@ const Button = (props) => {
         disabled={props.disabled}
         icon={props.icon}
       onPress={props.onPress}
+      style={props.style}
       mode={Platform.OS === "android" ? "contained" : "text"}
     >
       {props.children}
