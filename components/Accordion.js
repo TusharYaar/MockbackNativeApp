@@ -7,14 +7,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Accordion = (props) => {
   const [expand, setExpand] = useState(false);
-  const {colors} = useTheme();
+  const {dark,colors} = useTheme();
   const toggleAccordion = () => {
     setExpand(!expand);
   };
 
   return (
-    <View style={[styles.accordionContainer,props.style, {backgroundColor: colors.surface}]}>
-      <TouchableNativeFeedback onPress={toggleAccordion}>
+    <View style={[styles.accordionContainer, {backgroundColor: colors.surface},props.style]}>
+      <TouchableNativeFeedback onPress={toggleAccordion} background={TouchableNativeFeedback.Ripple(dark? "black": "gray", false)}>
         <View style={[styles.accordion,{backgroundColor: colors.surface}]}>
           <View style={styles.header}>
             <View style={styles.title}>
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
   },
   accordion: {
     padding: 20,
-    backgroundColor: "white",
     borderRadius: 4,
     
   },

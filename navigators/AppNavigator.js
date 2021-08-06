@@ -28,6 +28,7 @@ const AppNavigator = () => {
   }, [dispatch]);
 
   const user = useSelector((state) => state.user);
+
   if (user.autoLogin) return <LoadingScreen />;
   else if (!user.email) return <Login />;
   else if (user.email) return <DrawerNavigator />;

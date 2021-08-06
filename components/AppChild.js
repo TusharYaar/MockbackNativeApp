@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 
 import Themes from "../data/themes";
 const AppChild = () => {
-  const theme = Themes[0];
+  const theme = Themes[1];
   const currentTheme = useSelector(state => state.user.theme);
   return (
     <PaperProvider theme={theme}>

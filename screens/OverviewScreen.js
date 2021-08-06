@@ -1,14 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 
-import { Title, Card, Paragraph, Caption } from "react-native-paper";
+import { Title, Paragraph, Caption } from "react-native-paper";
 
+import Card from "../components/Card";
 import Accordion from "../components/Accordion";
 
 import { ACCESSLEVEL } from "../data/mappings";
 import { useSelector } from "react-redux";
 
 import { useTheme } from '@react-navigation/native';
+
 
 const OverviewScreen = () => {
   const mockspace = useSelector((state) => state.mockspaces.currentMockspace);
@@ -21,7 +23,7 @@ const OverviewScreen = () => {
     <View key={u.email} style={styles.accessUser}>
       <Caption>{u.email}</Caption>
       <View style={styles.accessLevelContainer}>
-      {userEmail === u.email ? <View style={styles.myLevel} /> : null}
+      {userEmail === u.email ? <View style={[styles.myLevel,{backgroundColor:colors.accent}]} /> : null}
       <Caption>{ACCESSLEVEL[u.accessLevel]}</Caption>
       </View>
     </View>
@@ -30,18 +32,12 @@ const OverviewScreen = () => {
     <ScrollView style={styles.screen}>
       <Text style={[styles.title, {color: colors.text}]}> {mockspace.mockspaceName} </Text>
       <View style={styles.cardContainer}>
-        <Card style={styles.card}>
-          <Card.Content>
-            <Title>Routes</Title>
-            <Paragraph>{`${mockspace?.routes?.length} out of ${mockspace?.maxRoutes} routes used`}</Paragraph>
-          </Card.Content>
+        <Card style={styles.card} title="Routes">     
+            <Paragraph >{`${mockspace?.routes?.length} out of ${mockspace?.maxRoutes} routes used`}</Paragraph>
         </Card>
         <View style={{ width: 10 }} />
-        <Card style={styles.card}>
-          <Card.Content>
-            <Title>Routes History</Title>
+        <Card style={styles.card} title="Route History"> 
             <Paragraph>{`${mockspace?.routeHistory?.length} out of ${mockspace?.maxRouteHistory} history showing`}</Paragraph>
-          </Card.Content>
         </Card>
       </View>
       <Accordion title="Acess Details" icon="account-group" style={styles.accordion}>

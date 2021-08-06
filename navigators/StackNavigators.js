@@ -12,11 +12,12 @@ import RouteDetailScreen from '../screens/RouteDetailScreen';
 import RouteHistoryDetailScreen from '../screens/RouteHistoryDetailScreen';
 import Login from '../screens/Login';
 import SignupScreen from '../screens/SignupScreen';
+import SettingScreen from "../screens/SettingScreen";
 
 
 const MockspaceStack = createStackNavigator();
 const AuthStack = createStackNavigator();
-
+const SettingsStack = createStackNavigator();
 
 
 export const MockspaceStackNavigator = ({ mockspaceName}) => {
@@ -33,6 +34,8 @@ export const MockspaceStackNavigator = ({ mockspaceName}) => {
     if(["Settings"].includes(route.name) || currentMockspaceId === route.params.mockspaceId ) return;
     dispatch(setCurrentMockspace(route.params.mockspaceId));
   }, [history, routes]);
+
+
   const screenOptions = ({navigation}) => ({
     title: mockspaceName,
     headerLeft: () => (
@@ -58,5 +61,25 @@ export const AuthStackNavigator = () => {
       <AuthStack.Screen name="Login" component={Login}/>
       <AuthStack.Screen name="Signup" component={SignupScreen}/>
     </AuthStack.Navigator>
+  );
+}
+
+
+export const SettingsStackNavigator = () => {
+  const {colors} = useTheme();
+
+  const screenOptions = ({navigation}) => ({
+    title: "Settings",
+    headerLeft: () => (
+      <IconButton icon="menu" size={24} color={colors.text} onPress={()=> navigation.toggleDrawer() } />
+    ),
+    headerStyle: {
+    backgroundColor: colors.primary,
+    }
+  })
+  return (
+    <SettingsStack.Navigator >
+      <SettingsStack.Screen name="Setting" component={SettingScreen} options={screenOptions}/>
+    </SettingsStack.Navigator>
   );
 }

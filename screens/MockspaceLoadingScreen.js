@@ -2,23 +2,25 @@ import React, { useRef, useEffect } from "react";
 import { StyleSheet, Alert } from "react-native";
 import LottieView from "lottie-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-
+import { useTheme } from "@react-navigation/native";
 
 import { useDispatch } from "react-redux";
-import {fetchMockspaces} from "../store/actions/mockspaces"
+import { fetchMockspaces } from "../store/actions/mockspaces";
 
-import { Caption } from 'react-native-paper';
+import { Paragraph } from "react-native-paper";
 
 const MockspaceLoadingScreen = () => {
   const animation = useRef(null);
   const dispatch = useDispatch();
+  const theme = useTheme();
 
-useEffect(() => {
-  dispatch(fetchMockspaces());
-},[dispatch])
+  useEffect(() => {
+    dispatch(fetchMockspaces());
+  }, [dispatch]);
   return (
-    <SafeAreaView style={styles.screen}>
+    <SafeAreaView
+      style={[styles.screen, { backgroundColor: theme.colors.background }]}
+    >
       <LottieView
         ref={animation}
         style={{
@@ -27,7 +29,9 @@ useEffect(() => {
         autoPlay={true}
         source={require("../assets/lotties/running-server.json")}
       />
-      <Caption style={styles.text}>First call to the server may take some time. Please wait</Caption>
+      <Paragraph style={styles.text}>
+        First call to the server may take some time. Please wait
+      </Paragraph>
     </SafeAreaView>
   );
 };
@@ -40,7 +44,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   text: {
-    textAlign: 'center',
-  }
-
+    textAlign: "center",
+  },
 });

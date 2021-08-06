@@ -9,15 +9,13 @@ import NoMockspaceScreen from "../screens/NoMockspaceScreen";
 
 import { useSelector } from "react-redux";
 
-import { MockspaceStackNavigator } from "./StackNavigators";
-import SettingScreen from "../screens/SettingScreen";
+import { MockspaceStackNavigator,SettingsStackNavigator } from "./StackNavigators";
 import { Text } from "react-native-paper";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = (props) => {
   const mockspaces = useSelector((state) => state.mockspaces);
-
   if (!mockspaces.loaded) return <MockspaceLoadingScreen />;
   else if (mockspaces.mockspaces.length === 0) return <NoMockspaceScreen />;
 
@@ -45,7 +43,7 @@ const DrawerNavigator = (props) => {
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
       {mockspaceDrawerItems}
-      <Drawer.Screen name="Settings" component={SettingScreen} />
+      <Drawer.Screen name="Settings" component={SettingsStackNavigator} />
     </Drawer.Navigator>
   );
 };
