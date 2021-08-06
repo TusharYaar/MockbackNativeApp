@@ -15,7 +15,6 @@ const MockspaceLoadingScreen = () => {
   const theme = useTheme();
 
   useEffect(() => {
-    console.log("Running");
     dispatch(fetchMockspaces());
   }, [dispatch]);
   return (

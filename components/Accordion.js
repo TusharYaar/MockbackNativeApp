@@ -29,7 +29,7 @@ const Accordion = (props) => {
             <MaterialCommunityIcons
               name={expand ? "menu-up" : "menu-down"}
               size={24}
-              color={ colors.text}
+              color={colors.text}
             />
           </View>
           {expand ? <View style={styles.body}>{props.children}</View> : null}
