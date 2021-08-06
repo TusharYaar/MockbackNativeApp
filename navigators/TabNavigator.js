@@ -1,10 +1,12 @@
-import React from 'react';
-import {StyleSheet } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import {Text} from "react-native-paper"
+import { useTheme } from "@react-navigation/native";
 
-import RoutesHistoryScreen from "../screens/RoutesHistoryScreen"
+import { Text } from "react-native-paper";
+
+import RoutesHistoryScreen from "../screens/RoutesHistoryScreen";
 
 import RoutesScreen from "../screens/RoutesScreen";
 import OverviewScreen from "../screens/OverviewScreen";
@@ -12,21 +14,45 @@ import OverviewScreen from "../screens/OverviewScreen";
 const Tab = createMaterialTopTabNavigator();
 
 const TabNavigator = () => {
+  const theme = useTheme();
   return (
-<Tab.Navigator>
-      <Tab.Screen name="Overview" component={OverviewScreen} options={{ tabBarLabel:({focused}) => <Text style={focused ? styles.focusedTab : null} >OVERVIEW</Text>}} />
-      <Tab.Screen name="Routes" component={RoutesScreen} />
-      <Tab.Screen name="History" component={RoutesHistoryScreen} options={{ tabBarLabel:({focused}) => <Text style={focused ? styles.focusedTab : null}>HISTORY</Text> }}/>
+    <Tab.Navigator tabBarOptions={tabBarOptions(theme)}>
+      <Tab.Screen
+        name="Overview"
+        component={OverviewScreen}
+        options={tabOption("Overview")}
+      />
+      <Tab.Screen
+        name="Routes"
+        component={RoutesScreen}
+        options={tabOption("Routes")}
+      />
+      <Tab.Screen
+        name="History"
+        component={RoutesHistoryScreen}
+        options={tabOption("History")}
+      />
     </Tab.Navigator>
   );
-}
-
-
+};
 
 export default TabNavigator;
 
 const styles = StyleSheet.create({
   focusedTab: {
-    color: "orange",
   },
-})
+});
+
+const tabBarOptions = (theme) => ({
+  indicatorStyle: {
+    backgroundColor: theme.colors.primary,
+  },
+});
+
+const tabOption = (route,theme=null) => ({
+  tabBarLabel: ({ focused }) => (
+    <Text style={focused ? styles.focusedTab : null}>
+      {route.toUpperCase()}
+    </Text>
+  ),
+});
