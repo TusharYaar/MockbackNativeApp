@@ -22,7 +22,7 @@ const AppChild = () => {
 
   return (
     <PaperProvider theme={appliedTheme}>
-      <StatusBar style={appliedTheme.dark ? "light": "dark"} />
+      <StatusBar style={appliedTheme.dark ? "light": "dark"} backgroundColor={appliedTheme.primary}/>
       <SafeAreaProvider>
         <NavigationContainer theme={appliedTheme}>
           <AppNavigator />

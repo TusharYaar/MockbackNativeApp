@@ -46,47 +46,23 @@ const OverviewScreen = () => {
       <View style={styles.cardContainer}>
         <Card style={styles.card} title="Routes">     
             <Paragraph >{`${mockspace?.routes?.length} out of ${mockspace?.maxRoutes} routes used`}</Paragraph>
-            <LineChart
-    data={{
-      labels: ["January", "February", "March", "April", "May", "June"],
-      datasets: [
-        {
+            <ProgressChart
+    data={{    
           data: [
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100
+            mockspace?.routes?.length/mockspace?.maxRoutes
           ]
-        }
-      ]
     }}
     width={Dimensions.get("window").width - 40} // from react-native
-    height={220}
-    yAxisLabel="$"
-    yAxisSuffix="k"
-    yAxisInterval={1} // optional, defaults to 1
+    height={120}
     chartConfig={{
       backgroundColor: "#e26a00",
       backgroundGradientFrom: "#fb8c00",
       backgroundGradientTo: "#ffa726",
-      decimalPlaces: 2, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      style: {
-        borderRadius: 16
-      },
-      propsForDots: {
-        r: "6",
-        strokeWidth: "2",
-        stroke: "#ffa726"
-      }
+      labelColor: (opacity = 1) => `rgba(255, 255, 255, 1)`,
     }}
-    bezier
     style={{
-      marginVertical: 8,
-      borderRadius: 16
+      borderRadius: 10
     }}
   />
         </Card>
@@ -98,12 +74,12 @@ const OverviewScreen = () => {
       datasets: [
         {
           data: [
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100
+            Math.random(),
+            Math.random(),
+            Math.random(),
+            Math.random(),
+            Math.random(),
+            Math.random()
           ]
         }
       ]
@@ -138,6 +114,26 @@ const OverviewScreen = () => {
         </Card>
       </View>
       <Accordion title="Acess Details" icon="account-group" style={styles.accordion}>
+      <ProgressChart
+    data={{    
+          data: [
+            mockspace?.hasAccess?.length/mockspace?.maxAccess
+          ]
+    }}
+    width={Dimensions.get("window").width - 80} // from react-native
+    height={120}
+    chartConfig={{
+      backgroundColor: "#e26a00",
+      backgroundGradientFrom: "#fb8c00",
+      backgroundGradientTo: "#ffa726",
+      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(255, 255, 255, 1)`,
+    }}
+    style={{
+      marginVertical: 10,
+      borderRadius: 10
+    }}
+  />
         {accessDetails}
       </Accordion>
     </ScrollView>
@@ -183,6 +179,6 @@ const styles = StyleSheet.create({
   },
   accordion: {
     marginVertical: 5,
-    marginBottom: 40,
+    marginBottom: 20,
   }
 });
