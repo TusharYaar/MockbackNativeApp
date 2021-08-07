@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ImageBackground, Alert,ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Alert,
+  ScrollView,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, IconButton, Paragraph } from "react-native-paper";
 
@@ -8,7 +15,6 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../store/actions/user";
 
 import Button from "../components/Button";
-
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -47,7 +53,7 @@ const Login = (props) => {
   };
 
   // const handleGoogleLogin = () => {
-  //   const 
+  //   const
   // }
 
   return (
@@ -62,41 +68,46 @@ const Login = (props) => {
         </ImageBackground>
       </View>
       <ScrollView style={styles.bodyContainer}>
-
-      <View style={styles.login}>
-        <TextInput
-          label="Email"
-          value={email}
-          onChangeText={handleEmailChange}
-          style={styles.margin}
+        <View style={styles.login}>
+          <TextInput
+            label="Email"
+            value={email}
+            onChangeText={handleEmailChange}
+            style={styles.margin}
           />
-        <TextInput
-          label="Password"
-          value={password}
-          onChangeText={handlePasswordChange}
-          style={styles.margin}
+          <TextInput
+            label="Password"
+            value={password}
+            onChangeText={handlePasswordChange}
+            style={styles.margin}
           />
-        
-      </View>
-      <Button
+        </View>
+        <Button
           onPress={handleLogin}
           style={styles.margin}
           disabled={isLoading}
-          >
+        >
           Login
         </Button>
-      <View style={styles.socialLoginContainer}>
-        <Paragraph>Or Sign In using Social Media</Paragraph>
-        <View style={styles.socialLogin}>
-        <IconButton icon="google" size={40}
-    onPress={() => console.log('Pressed')}/>
-            <IconButton icon="github" size={40}
-    onPress={() => console.log('Pressed')}/>
-        
+        <View style={styles.socialLoginContainer}>
+          <Paragraph>Or Sign In using Social Media</Paragraph>
+          <View style={styles.socialLogin}>
+            <IconButton
+              icon="google"
+              size={40}
+              onPress={() => console.log("Pressed")}
+            />
+            <IconButton
+              icon="github"
+              size={40}
+              onPress={() => console.log("Pressed")}
+            />
+          </View>
         </View>
-      </View>
-        <Paragraph style={styles.signUpText}>Don't have an account? Sign Up</Paragraph>
-    </ScrollView>
+        <Paragraph style={styles.signUpText}>
+          Don't have an account? Sign Up
+        </Paragraph>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -117,7 +128,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 72,
     fontFamily: "WorkSans_500Medium",
-    marginVertical:10,
+    marginVertical: 10,
     textAlign: "center",
   },
   bodyContainer: {
@@ -133,10 +144,10 @@ const styles = StyleSheet.create({
   socialLoginContainer: {
     justifyContent: "center",
     alignItems: "center",
-   width: "100%",
-   padding: 20,
+    width: "100%",
+    padding: 20,
   },
-  socialLogin:{
+  socialLogin: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-around",
@@ -144,7 +155,7 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     textAlign: "center",
-  }
+  },
 });
 
 export const loginOptions = {

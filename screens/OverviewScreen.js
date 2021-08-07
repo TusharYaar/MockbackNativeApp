@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
 
-import { Title, Paragraph, Caption, Button } from "react-native-paper";
+import { Paragraph, Caption } from "react-native-paper";
 
 import Card from "../components/Card";
 import Accordion from "../components/Accordion";
@@ -11,7 +11,17 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { useTheme } from '@react-navigation/native';
 
-import { updateMockspaces } from "../store/actions/mockspaces";
+
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
+
+
 const OverviewScreen = () => {
   const mockspace = useSelector((state) => state.mockspaces.currentMockspace);
   const userEmail = useSelector((state) => state.user.email);
@@ -36,10 +46,95 @@ const OverviewScreen = () => {
       <View style={styles.cardContainer}>
         <Card style={styles.card} title="Routes">     
             <Paragraph >{`${mockspace?.routes?.length} out of ${mockspace?.maxRoutes} routes used`}</Paragraph>
+            <LineChart
+    data={{
+      labels: ["January", "February", "March", "April", "May", "June"],
+      datasets: [
+        {
+          data: [
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100
+          ]
+        }
+      ]
+    }}
+    width={Dimensions.get("window").width - 40} // from react-native
+    height={220}
+    yAxisLabel="$"
+    yAxisSuffix="k"
+    yAxisInterval={1} // optional, defaults to 1
+    chartConfig={{
+      backgroundColor: "#e26a00",
+      backgroundGradientFrom: "#fb8c00",
+      backgroundGradientTo: "#ffa726",
+      decimalPlaces: 2, // optional, defaults to 2dp
+      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      style: {
+        borderRadius: 16
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: "#ffa726"
+      }
+    }}
+    bezier
+    style={{
+      marginVertical: 8,
+      borderRadius: 16
+    }}
+  />
         </Card>
-        <View style={{ width: 10 }} />
         <Card style={styles.card} title="Route History"> 
             <Paragraph>{`${mockspace?.routeHistory?.length} out of ${mockspace?.maxRouteHistory} history showing`}</Paragraph>
+            <LineChart
+    data={{
+      labels: ["January", "February", "March", "April", "May", "June"],
+      datasets: [
+        {
+          data: [
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100
+          ]
+        }
+      ]
+    }}
+    width={Dimensions.get("window").width - 40} // from react-native
+    height={220}
+    yAxisLabel="$"
+    yAxisSuffix="k"
+    yAxisInterval={1} // optional, defaults to 1
+    chartConfig={{
+      backgroundColor: "#e26a00",
+      backgroundGradientFrom: "#fb8c00",
+      backgroundGradientTo: "#ffa726",
+      decimalPlaces: 2, // optional, defaults to 2dp
+      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      style: {
+        borderRadius: 16
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: "#ffa726"
+      }
+    }}
+    bezier
+    style={{
+      marginVertical: 8,
+      borderRadius: 16
+    }}
+  />
         </Card>
       </View>
       <Accordion title="Acess Details" icon="account-group" style={styles.accordion}>
@@ -62,11 +157,12 @@ const styles = StyleSheet.create({
     fontFamily: "WorkSans_500Medium",
   },
   cardContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between",
   },
   card: {
     flex: 1,
+    marginVertical: 5,
   },
   accessUser: {
     flexDirection: "row",
@@ -86,6 +182,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   accordion: {
-    marginVertical: 10,
+    marginVertical: 5,
+    marginBottom: 40,
   }
 });
