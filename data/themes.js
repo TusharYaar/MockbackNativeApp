@@ -11,7 +11,8 @@ export default themes = [
     "#1b5e20",
     "#fafafa",
     "#fff",
-    "rgba(0, 0, 0, 0.87)"
+    "rgba(0, 0, 0, 0.87)",
+    "#fff"
   ),
   new Theme(
     "Blue Dark Theme",
@@ -22,6 +23,7 @@ export default themes = [
     "#b33f40",
     "#121212",
     "#1E1E1E",
+    "#fff",
     "#fff"
   ),
   new Theme(
@@ -33,7 +35,8 @@ export default themes = [
     "#1b5e20",
     "#fafafa",
     "#fff",
-    "rgba(0, 0, 0, 0.87)"
+    "rgba(0, 0, 0, 0.87)",
+    "#fff"
   ),  new Theme(
     "Blue Light Theme",
     "lightB2lue",

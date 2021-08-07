@@ -16,6 +16,8 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 
+import {useTheme} from "@react-navigation/native";
+
 import { useSelector, useDispatch } from "react-redux";
 
 import { logoutUser } from "../store/actions/user";
@@ -23,12 +25,14 @@ import { updateMockspaces } from "../store/actions/mockspaces";
 
 const CustomDrawer = (props) => {
   const dispatch = useDispatch();
+  const {colors} = useTheme();  
+  const user = useSelector((state) => state.user);
+  const mockspacesData = useSelector((state) => state.mockspaces);
+
   const handleLogoutBtnClick = () => {
     dispatch(logoutUser());
   };
 
-  const user = useSelector((state) => state.user);
-  const mockspacesData = useSelector((state) => state.mockspaces);
   return (
     <SafeAreaView {...props} style={styles.screen}>
       <View>
@@ -45,7 +49,7 @@ const CustomDrawer = (props) => {
           </Subheading>
           <IconButton
             icon="refresh"
-            color="white"
+            color={colors.text}
             size={20}
             onPress={() => dispatch(updateMockspaces())}
           />

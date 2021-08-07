@@ -38,8 +38,8 @@ export const MockspaceStackNavigator = ({ mockspaceName}) => {
 
   const screenOptions = ({navigation}) => ({
     title: mockspaceName,
-    headerLeft: () => (
-      <IconButton icon="menu" size={24} color={colors.text} onPress={()=> navigation.toggleDrawer() } />
+    headerLeft: ({tintColor}) => (
+      <IconButton icon="menu" size={24} color={tintColor} onPress={()=> navigation.toggleDrawer() } />
     ),
     headerStyle: {
     backgroundColor: colors.primary,
@@ -47,7 +47,7 @@ export const MockspaceStackNavigator = ({ mockspaceName}) => {
   })
   
   return (
-    <MockspaceStack.Navigator screenOptions={{headerTitleStyle: {fontFamily: "WorkSans_500Medium"}}}>
+    <MockspaceStack.Navigator screenOptions={{headerTitleStyle: {fontFamily: "WorkSans_500Medium"},headerTintColor: colors.headerText}}>
       <MockspaceStack.Screen name="Mockspace" component={TabNavigator} options={screenOptions}/>
       <MockspaceStack.Screen name="RouteDetail" component={RouteDetailScreen}/>
       <MockspaceStack.Screen name="RouteHistoryDetail" component={RouteHistoryDetailScreen}/>

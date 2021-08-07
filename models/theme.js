@@ -1,5 +1,5 @@
 export default class Theme {
-  constructor(name, label,description, isDark, primary, secondary, background, paper,text) {
+  constructor(name, label,description, isDark, primary, secondary, background, paper,text,headerText) {
     this.name = name;
     this.label = label;
     this.description = description;
@@ -15,9 +15,10 @@ export default class Theme {
       notification: "rgb(255, 69, 58)",
       onSurface: primary,
       placeholder: text,
-      primary,
+      primary, 
       surface: paper, //react-native-paper
       text,  //router text
+      headerText, //custom tag for header text color
     };
     (this.mode = "adaptive"),
       (this.roundness = 4),
