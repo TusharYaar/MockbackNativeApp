@@ -60,7 +60,7 @@ const CustomDrawer = (props) => {
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
-      <Button onPress={handleLogoutBtnClick} icon="logout-variant">
+      <Button onPress={handleLogoutBtnClick} icon="logout-variant" color={colors.accent}>
         Logout
       </Button>
     </SafeAreaView>

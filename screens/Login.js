@@ -61,7 +61,7 @@ const Login = (props) => {
           <Text style={styles.title}>Hello</Text>
         </ImageBackground>
       </View>
-      <View style={styles.bodyContainer}>
+      <ScrollView style={styles.bodyContainer}>
 
       <View style={styles.login}>
         <TextInput
@@ -96,7 +96,7 @@ const Login = (props) => {
         </View>
       </View>
         <Paragraph style={styles.signUpText}>Don't have an account? Sign Up</Paragraph>
-    </View>
+    </ScrollView>
     </SafeAreaView>
   );
 };
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 72,
-    marginVertical: 20,
+    fontFamily: "WorkSans_500Medium",
+    marginVertical:10,
     textAlign: "center",
   },
   bodyContainer: {
