@@ -20,11 +20,11 @@ export default class Theme {
       text,  //router text
       headerText, //custom tag for header text color
     };
-    (this.mode = "adaptive"),
-      (this.roundness = 4),
-      (this.animation = {
+    this.mode = "adaptive";
+    this.roundness = 4;
+    this.animation = {
         scale: 1,
-      });
+      };
     this.fonts = {
       light: {
         fontFamily: "WorkSans_300Light",

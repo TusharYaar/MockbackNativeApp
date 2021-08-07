@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
 import { Paragraph, Caption } from "react-native-paper";
 
 import Card from "../components/Card";
-import Accordion from "../components/Accordion";
+
 
 import { ACCESSLEVEL } from "../data/mappings";
 import { useSelector, useDispatch } from "react-redux";
@@ -113,14 +113,15 @@ const OverviewScreen = () => {
   />
         </Card>
       </View>
-      <Accordion title="Acess Details" icon="account-group" style={styles.accordion}>
+      <Card title="Acess Details" style={styles.accessCard}>
+      {accessDetails}
       <ProgressChart
     data={{    
           data: [
             mockspace?.hasAccess?.length/mockspace?.maxAccess
           ]
     }}
-    width={Dimensions.get("window").width - 80} // from react-native
+    width={Dimensions.get("window").width - 40} // from react-native
     height={120}
     chartConfig={{
       backgroundColor: "#e26a00",
@@ -134,8 +135,8 @@ const OverviewScreen = () => {
       borderRadius: 10
     }}
   />
-        {accessDetails}
-      </Accordion>
+      
+      </Card>
     </ScrollView>
   );
 };
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#00b0ff",
     marginRight: 5,
   },
-  accordion: {
+  accessCard: {
     marginVertical: 5,
     marginBottom: 20,
   }

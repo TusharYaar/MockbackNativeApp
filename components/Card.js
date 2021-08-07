@@ -10,7 +10,7 @@ const Card = (props) => {
     <View
       style={[styles.card, { backgroundColor: colors.surface }, props.style]}
     >
-      <Title>{props.title}</Title>
+      <Title style={props.titleColor ? {color: props.titleColor} : null}>{props.title}</Title>
       <View>{props.children}</View>
     </View>
   );
