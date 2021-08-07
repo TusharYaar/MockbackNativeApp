@@ -100,7 +100,7 @@ const Login = (props) => {
             <IconButton
               icon="github"
               size={40}
-              onPress={() => console.log("Pressed")}
+              onPress={() => props.navigation.navigate("Signup")}
             />
           </View>
         </View>

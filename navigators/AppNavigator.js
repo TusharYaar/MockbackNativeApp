@@ -9,7 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Login from "../screens/Login";
 import DrawerNavigator from "../navigators/DrawerNavigator";
 import LoadingScreen from "../screens/LoadingScreen";
-
+import {AuthStackNavigator} from "../navigators/StackNavigators"
 const AppNavigator = () => {
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ const AppNavigator = () => {
   const user = useSelector((state) => state.user);
 
   if (user.autoLogin) return <LoadingScreen />;
-  else if (!user.email) return <Login />;
+  else if (!user.email) return <AuthStackNavigator />;
   else if (user.email) return <DrawerNavigator />;
 };
 
