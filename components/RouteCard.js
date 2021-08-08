@@ -1,42 +1,40 @@
 import React from "react";
-import { StyleSheet, View, TouchableNativeFeedback } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 import Accordion from "./Accordion";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Card, Button, Subheading } from "react-native-paper";
-const RouteCard = ({ route }) => {
-  const navigation = useNavigation();
+import { Card, Subheading, Text } from "react-native-paper";
 
+import { RESPONSE } from "../data/mappings";
+import Button from "../components/Button";
+const RouteCard = ({ route, mockspace }) => {
+  const navigation = useNavigation();
   return (
     <Accordion
       title={`/${route.pathname}`}
       icon={route.authorization ? "lock" : "lock-open-variant"}
       style={styles.card}
-    ></Accordion>
+    >
+      <Text>
+        {`https://mockback.herokuapp.com/${mockspace}/r/` + route.pathname}
+      </Text>
+      <Text>
+        {route.method} {route.httpStatus}
+      </Text>
+      {route.customHeader && <Text>Has custom headers</Text>}
+      <Text>{RESPONSE[route.responseType]}</Text>
+      <Button
+        style={styles.btn}
+        onPress={() => {
+          navigation.navigate("RouteDetail", { routeId: route._id });
+        }}
+      >
+        View Details
+      </Button>
+    </Accordion>
   );
-
-//   return (
-//     <View style={styles.cardContainer}>
-//       <TouchableNativeFeedback
-//         onPress={() => {
-//           navigation.navigate("RouteDetail", { routeId: route._id });
-//         }}
-//       >
-//         <Card style={styles.card}>
-//           <View style={styles.row}>
-//             <MaterialCommunityIcons
-//               name={route.authorization ? "lock" : "lock-open-variant"}
-//               size={20}
-//               color={route.authorization ? "green" : "red"}
-//             />
-//             <Subheading>/{route.pathname}</Subheading>
-//           </View>
-//         </Card>
-//       </TouchableNativeFeedback>
-//     </View>
-//   );
 };
 
 export default RouteCard;
@@ -49,5 +47,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  btn: {
+    alignSelf: "flex-end",
+    marginVertical: 10,
   },
 });
