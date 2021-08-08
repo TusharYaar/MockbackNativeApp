@@ -128,7 +128,7 @@ const Login = (props) => {
           Login
         </Button>
         <View style={styles.socialLoginContainer}>
-          <Paragraph>Or Sign In using Social Media</Paragraph>
+          <Paragraph>Or Login using Social Media</Paragraph>
           <View style={styles.socialLogin}>
             {isLoading ? <ActivityIndicator size="small" color="secondary" /> :
             <IconButton icon="google" size={40} onPress={handleGoogleLogin} />

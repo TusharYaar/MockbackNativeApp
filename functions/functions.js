@@ -68,3 +68,28 @@ export const googleLogin = (user) => {
     }
   })
 }
+
+export const signup = (sendData) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(`${BASE_URL}/auth/signup`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sendData),
+      });
+      const userData = await response.json();
+      if (response.ok){
+        resolve(userData);
+      } 
+      else {
+        reject(userData);
+      } 
+    } catch (err) {
+      console.log(err.message);
+      reject(err);
+    }
+  });
+};
