@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import * as GoogleSignIn from 'expo-google-sign-in';
 import {
   Avatar,
   Button,
@@ -30,6 +30,7 @@ const CustomDrawer = (props) => {
   const mockspacesData = useSelector((state) => state.mockspaces);
 
   const handleLogoutBtnClick = () => {
+    GoogleSignIn.disconnectAsync()
     dispatch(logoutUser());
   };
 

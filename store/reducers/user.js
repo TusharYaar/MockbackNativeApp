@@ -7,7 +7,7 @@ const initialState = {
     token: null,
     email: null,
     autoLogin: true,
-    theme: "avacardo",
+    theme: "lightBlue",
 }
 
 

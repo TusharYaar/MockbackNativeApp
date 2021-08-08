@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,55 +6,89 @@ import {
   ImageBackground,
   Alert,
   ScrollView,
+  TouchableNativeFeedback,
+
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, IconButton, Paragraph } from "react-native-paper";
 
 import { useDispatch } from "react-redux";
-
 import { loginUser } from "../store/actions/user";
 
-import Button from "../components/Button";
+import * as GoogleSignIn from "expo-google-sign-in";
 
+import { login, googleLogin } from "../functions/functions";
+import Button from "../components/Button";
+import ActivityIndicator from "../components/ActivityIndicator.js"
+const CLIENT_ID =
+  "270781488858-pp0e37higjbtbv1cf7fem4mlos6jsv8c.apps.googleusercontent.com";
 const Login = (props) => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(""); 
+  const [passwordVisible, setPasswordVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+
+  const _syncUserWithStateAsync = useCallback(async () => {
+    try {
+      const user = await GoogleSignIn.signInSilentlyAsync();
+      if (user) {
+        setIsLoading(true);
+        try {
+          const userData = await googleLogin(user);
+          dispatch(loginUser(userData));
+        } catch (err) {
+          Alert.alert("Error", err.message);
+          setIsLoading(false);
+        }
+      }
+    } catch (e) {
+      Alert.alert("Error", e.message);
+    }
+  }, [GoogleSignIn]);
+
+  useEffect(() => {
+    const initAsync = async () => {
+      await GoogleSignIn.getPlayServiceAvailability(true);
+      await GoogleSignIn.initAsync({
+        clientId: CLIENT_ID,
+        scopes: ["openid", "email", "profile"],
+      });
+    };
+    initAsync();
+  }, [GoogleSignIn, _syncUserWithStateAsync]);
+
   const handleEmailChange = (text) => {
     setEmail(text);
   };
   const handlePasswordChange = (text) => {
     setPassword(text);
   };
+  const togglePasswordVisible = () => {
+    setPasswordVisible(visible => !visible);
+  }
   const handleLogin = async () => {
     setIsLoading(true);
-    const obj = { email, password };
     try {
-      const response = await fetch(
-        "https://mockback.herokuapp.com/auth/login",
-        {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(obj),
-        }
-      );
-      const userData = await response.json();
-      if (response.ok) {
-        dispatch(loginUser(userData));
-      } else if (!response.ok) throw new Error(userData.message);
+      const userData = await login(email, password);
+      dispatch(loginUser(userData));
     } catch (err) {
       Alert.alert("Error", err.message);
       setIsLoading(false);
     }
   };
 
-  // const handleGoogleLogin = () => {
-  //   const
-  // }
+  const handleGoogleLogin = async () => {
+    try {
+      await GoogleSignIn.askForPlayServicesAsync();
+      const { type } = await GoogleSignIn.signInAsync();
+      if (type === "success") {
+        _syncUserWithStateAsync();
+      }
+    } catch ({ message }) {
+      alert("login: Error:" + message);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -74,12 +108,16 @@ const Login = (props) => {
             value={email}
             onChangeText={handleEmailChange}
             style={styles.margin}
+            autoCapitalize="none"
           />
           <TextInput
             label="Password"
             value={password}
             onChangeText={handlePasswordChange}
             style={styles.margin}
+            secureTextEntry={passwordVisible}
+            autoCapitalize="none"
+            right={<TextInput.Icon name={passwordVisible ? "eye-off" : "eye"} onPress={togglePasswordVisible} />}
           />
         </View>
         <Button
@@ -92,21 +130,24 @@ const Login = (props) => {
         <View style={styles.socialLoginContainer}>
           <Paragraph>Or Sign In using Social Media</Paragraph>
           <View style={styles.socialLogin}>
-            <IconButton
-              icon="google"
-              size={40}
-              onPress={() => console.log("Pressed")}
-            />
-            <IconButton
-              icon="github"
-              size={40}
-              onPress={() => props.navigation.navigate("Signup")}
-            />
+            {isLoading ? <ActivityIndicator size="small" color="secondary" /> :
+            <IconButton icon="google" size={40} onPress={handleGoogleLogin} />
+            }
+                        {isLoading ? <ActivityIndicator size="small"  color="secondary" /> :
+             <IconButton
+             icon="github"
+             size={40}
+             onPress={() => props.navigation.navigate("Signup")}
+           />
+            }
+           
           </View>
         </View>
+        <TouchableNativeFeedback onPress={() => props.navigation.navigate("Signup")}>
         <Paragraph style={styles.signUpText}>
           Don't have an account? Sign Up
         </Paragraph>
+        </TouchableNativeFeedback>
       </ScrollView>
     </SafeAreaView>
   );
