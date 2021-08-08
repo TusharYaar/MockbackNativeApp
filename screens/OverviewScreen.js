@@ -7,30 +7,27 @@ import Card from "../components/Card";
 
 
 import { ACCESSLEVEL } from "../data/mappings";
-import { useSelector, useDispatch } from "react-redux";
+import LineColors from "../data/lineColors";
+import { useSelector } from "react-redux";
 
 import { useTheme } from '@react-navigation/native';
+import { subDays, format, parseISO, getDate, parse } from "date-fns";
 
 
 import {
   LineChart,
-  BarChart,
-  PieChart,
   ProgressChart,
-  ContributionGraph,
-  StackedBarChart
 } from "react-native-chart-kit";
 
 
 const OverviewScreen = () => {
   const mockspace = useSelector((state) => state.mockspaces.currentMockspace);
   const userEmail = useSelector((state) => state.user.email);
-  const dispatch = useDispatch();
-  
   const {colors} = useTheme();
   if (!mockspace._id) {
     return <View />;
   }
+
   const accessDetails = mockspace.hasAccess.map((u) => (
     <View key={u.email} style={styles.accessUser}>
       <Caption>{u.email}</Caption>
@@ -40,6 +37,29 @@ const OverviewScreen = () => {
       </View>
     </View>
   ));
+
+  const days = [6, 5, 4, 3, 2, 1, 0].map((day) =>
+    format(subDays(new Date(), day), "d-MMM")
+  );
+  const lineDataset = mockspace.routes.map((route, index) => {
+      let arr = [0, 0, 0, 0, 0, 0, 0];
+      mockspace.routeHistory.forEach((r) => {
+        if (r.pathname === route.pathname) {
+          let diff = getDate(parseISO(r.createdOn));
+          let index = days.findIndex(
+            (day) => getDate(parse(day, "d-MMM", new Date())) === diff
+          );
+          if (index > -1) arr[index]++;
+        }
+      });
+      return {
+        label: `/${route.pathname}`,
+        data: arr,
+        color: () => `${LineColors[index % (LineColors.length - 1)]}`,
+        strokeWidth:1
+      };
+    })
+
   return (
     <ScrollView style={styles.screen}>
       <Text style={[styles.title, {color: colors.text}]}> {mockspace.mockspaceName} </Text>
@@ -70,24 +90,11 @@ const OverviewScreen = () => {
             <Paragraph>{`${mockspace?.routeHistory?.length} out of ${mockspace?.maxRouteHistory} history showing`}</Paragraph>
             <LineChart
     data={{
-      labels: ["January", "February", "March", "April", "May", "June"],
-      datasets: [
-        {
-          data: [
-            Math.random(),
-            Math.random(),
-            Math.random(),
-            Math.random(),
-            Math.random(),
-            Math.random()
-          ]
-        }
-      ]
+      labels: days,
+      datasets: lineDataset
     }}
     width={Dimensions.get("window").width - 40} // from react-native
     height={220}
-    yAxisLabel="$"
-    yAxisSuffix="k"
     yAxisInterval={1} // optional, defaults to 1
     chartConfig={{
       backgroundColor: "#e26a00",
