@@ -6,8 +6,8 @@ import RouteHistoryCard from "../components/RouteHistoryCard";
 
 import { useSelector } from "react-redux";
 const RoutesHistoryScreen = () => {
-  const routeHistory = useSelector(
-    (state) => state.mockspaces.currentMockspace.routeHistory
+  const {routeHistory, _id} = useSelector(
+    (state) => state.mockspaces.currentMockspace
   );
 
 
@@ -20,7 +20,7 @@ const RoutesHistoryScreen = () => {
       style={styles.screen}
       data={routeHistory}
       keyExtractor={(item) => item._id}
-      renderItem={({ item }) => <RouteHistoryCard route={item} />}
+      renderItem={({ item }) => <RouteHistoryCard route={item} mockspace={_id}/>}
     />
   );
 };

@@ -5,9 +5,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import {useSelector} from 'react-redux';
 
 const RouteHistoryDetailScreen = ({route}) => {
-   const routeHistoryId = route.params.routeHistoryId
-    const routeDetail = useSelector(state => state.mockspaces.currentMockspace.routeHistory.find(route => route._id === routeHistoryId));
-
+   const { routeId } = route.params
+    const routeDetail = useSelector(state => state.mockspaces.currentMockspace.routeHistory.find(route => route._id === routeId));
+    console.log(routeDetail.pathname);
     return (
         <View>
             <Text></Text>
