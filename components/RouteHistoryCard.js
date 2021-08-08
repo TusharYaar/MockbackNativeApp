@@ -4,7 +4,7 @@ import { StyleSheet, View, Dimensions } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import * as WebBrowser from "expo-web-browser";
 
-import { Text, IconButton } from "react-native-paper";
+import { Paragraph, IconButton } from "react-native-paper";
 import {format,parseISO} from "date-fns";
 import Accordion from "./Accordion";
 import Button from "../components/Button";
@@ -25,9 +25,9 @@ const RouteHistoryCard = ({ route, mockspace }) => {
       style={styles.card}
     >
       <View style={styles.urlContainer}>
-        <Text>
+        <Paragraph>
           {`https://mockback.herokuapp.com/${mockspace}/r/` + route.pathname}
-        </Text>
+        </Paragraph>
         <IconButton
           icon="monitor-share"
           color={colors.accent}
@@ -35,11 +35,11 @@ const RouteHistoryCard = ({ route, mockspace }) => {
           onPress={openLink}
         />
       </View>
-      <Text>{route.method} {route.httpStatus}</Text>
-      <Text>{format(parseISO(route.createdOn), "dd-MMM-y h:mm:ss a")}</Text>
+      <Paragraph>{route.method} {route.httpStatus}</Paragraph>
+      <Paragraph>{format(parseISO(route.createdOn), "dd-MMM-y h:mm:ss a")}</Paragraph>
       <Button
         onPress={() => {
-          navigation.navigate("RouteHistoryDetail",{routeId: route._id});
+          navigation.navigate("RouteHistoryDetail",{routeId: route._id, header: `/${route.pathname}`});
         }}
         style={styles.btn}
       >

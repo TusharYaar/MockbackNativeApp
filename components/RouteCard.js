@@ -4,7 +4,7 @@ import { StyleSheet, View, Dimensions } from "react-native";
 import { useNavigation,useTheme } from "@react-navigation/native";
 import * as WebBrowser from 'expo-web-browser';
 
-import { Text,IconButton } from "react-native-paper";
+import { Paragraph,IconButton } from "react-native-paper";
 
 import { RESPONSE } from "../data/mappings";
 import Button from "../components/Button";
@@ -28,23 +28,23 @@ const RouteCard = ({ route, mockspace }) => {
       style={styles.card}
     >
       <View style={styles.urlContainer}>
-      <Text>
+      <Paragraph>
         {`https://mockback.herokuapp.com/${mockspace}/r/` + route.pathname}
-      </Text>
+      </Paragraph>
       <IconButton icon="monitor-share"
       color={colors.accent}
     size={20}
     onPress={openLink} />
       </View>
-      <Text>
+      <Paragraph>
         {route.method} {route.httpStatus}
-      </Text>
-      {route.customHeader && <Text>Has custom headers</Text>}
-      <Text>{RESPONSE[route.responseType]}</Text>
+      </Paragraph>
+      {route.customHeader && <Paragraph>Has custom headers</Paragraph>}
+      <Paragraph>{RESPONSE[route.responseType]}</Paragraph>
       <Button
         style={styles.btn}
         onPress={() => {
-          navigation.navigate("RouteDetail", { routeId: route._id });
+          navigation.navigate("RouteDetail", { routeId: route._id, header: `/${route.pathname}`, mockspace});
         }}
       >
         View Details

@@ -50,10 +50,11 @@ export const MockspaceStackNavigator = ({ mockspaceName }) => {
         screenOptions(navigation, colors, mockspaceName)
       }
       />
-      <MockspaceStack.Screen name="RouteDetail" component={RouteDetailScreen} />
+      <MockspaceStack.Screen name="RouteDetail" component={RouteDetailScreen} options={({route}) => ({title: route.params.header})}/>
       <MockspaceStack.Screen
         name="RouteHistoryDetail"
         component={RouteHistoryDetailScreen}
+        options={({route}) => ({title: route.params.header})}
       />
     </MockspaceStack.Navigator>
   );
