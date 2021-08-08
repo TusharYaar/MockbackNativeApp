@@ -39,7 +39,7 @@ const RouteHistoryCard = ({ route, mockspace }) => {
       <Paragraph>{format(parseISO(route.createdOn), "dd-MMM-y h:mm:ss a")}</Paragraph>
       <Button
         onPress={() => {
-          navigation.navigate("RouteHistoryDetail",{routeId: route._id, header: `/${route.pathname}`});
+          navigation.navigate("RouteHistoryDetail",{routeId: route._id, header: `/${route.pathname}`,mockspace});
         }}
         style={styles.btn}
       >

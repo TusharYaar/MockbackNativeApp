@@ -5,18 +5,19 @@ import * as WebBrowser from "expo-web-browser";
 import {
   Paragraph,
   Headline,
-  Caption,
   Subheading,
   IconButton,
 } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { useTheme } from "@react-navigation/native";
+import { LineChart } from "react-native-chart-kit";
 
 import { subDays, format, parseISO, getDate, parse } from "date-fns";
 import { RESPONSE } from "../data/mappings";
 import ServerGenResponse from "../components/ServerGenResponse";
 import CustomHeader from "../components/CustomHeader";
-import { LineChart } from "react-native-chart-kit";
+import DisplayCode from "../components/DisplayCode";
+import LastView from "../components/LastView";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -130,13 +131,9 @@ const RouteDetailScreen = ({ route, navigation }) => {
         <ServerGenResponse customBody={routeDetail.customBody} />
       )}
       {routeDetail.responseType === "customResponse" && (
-        <View
-          style={[styles.customResponse, { backgroundColor: colors.surface }]}
-        >
-          <Caption>{routeDetail.customBody}</Caption>
-        </View>
+        <DisplayCode code={routeDetail.customBody} title="Custom Body" />
       )}
-      <View style={[styles.view]} />
+      <LastView />
     </ScrollView>
   );
 };
@@ -165,9 +162,5 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingVertical: 10,
     paddingHorizontal: 20,
-  },
-  view: {
-    marginVertical: 10,
-    height: 10,
   },
 });

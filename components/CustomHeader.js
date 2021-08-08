@@ -5,7 +5,6 @@ import Accordion from './Accordion';
 
 const ServerGenResponse = ({headerPairs}) => {
     const pairs = JSON.parse(headerPairs);
-    console.log(pairs);
     const mapPairs = pairs.map((pair, index) => {
         return (
             <Paragraph key={index}>
