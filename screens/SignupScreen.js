@@ -198,13 +198,6 @@ const SignupScreen = ({navigation}) => {
             {isLoading ? <ActivityIndicator size="small" color="secondary" /> :
             <IconButton icon="google" size={40} onPress={handleGoogleLogin} />
             }
-                        {isLoading ? <ActivityIndicator size="small"  color="secondary" /> :
-             <IconButton
-             icon="github"
-             size={40}
-            //  onPress={() => props.navigation.navigate("Signup")}
-           />
-            }
            
           </View>
         </View>

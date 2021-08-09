@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Image,Dimensions } from 'react-native';
+import { StyleSheet, View, Image,Dimensions} from 'react-native';
 import { Title, Subheading } from 'react-native-paper';
 
 

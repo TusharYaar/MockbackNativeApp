@@ -6,8 +6,8 @@ import {
   ImageBackground,
   Alert,
   ScrollView,
+  AppState,
   TouchableNativeFeedback,
-
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, IconButton, Paragraph } from "react-native-paper";
@@ -16,19 +16,19 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../store/actions/user";
 
 import * as GoogleSignIn from "expo-google-sign-in";
-
-import { login, googleLogin } from "../functions/functions";
+import { login, googleLogin, githubLogin } from "../functions/functions";
 import Button from "../components/Button";
-import ActivityIndicator from "../components/ActivityIndicator.js"
+import ActivityIndicator from "../components/ActivityIndicator.js";
 const CLIENT_ID =
   "270781488858-pp0e37higjbtbv1cf7fem4mlos6jsv8c.apps.googleusercontent.com";
+
 const Login = (props) => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState(""); 
+  const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const _syncUserWithStateAsync = useCallback(async () => {
     try {
       const user = await GoogleSignIn.signInSilentlyAsync();
@@ -65,8 +65,8 @@ const Login = (props) => {
     setPassword(text);
   };
   const togglePasswordVisible = () => {
-    setPasswordVisible(visible => !visible);
-  }
+    setPasswordVisible((visible) => !visible);
+  };
   const handleLogin = async () => {
     setIsLoading(true);
     try {
@@ -89,7 +89,6 @@ const Login = (props) => {
       alert("login: Error:" + message);
     }
   };
-
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.imageContainer}>
@@ -117,7 +116,12 @@ const Login = (props) => {
             style={styles.margin}
             secureTextEntry={passwordVisible}
             autoCapitalize="none"
-            right={<TextInput.Icon name={passwordVisible ? "eye-off" : "eye"} onPress={togglePasswordVisible} />}
+            right={
+              <TextInput.Icon
+                name={passwordVisible ? "eye-off" : "eye"}
+                onPress={togglePasswordVisible}
+              />
+            }
           />
         </View>
         <Button
@@ -130,23 +134,19 @@ const Login = (props) => {
         <View style={styles.socialLoginContainer}>
           <Paragraph>Or Login using Social Media</Paragraph>
           <View style={styles.socialLogin}>
-            {isLoading ? <ActivityIndicator size="small" color="secondary" /> :
-            <IconButton icon="google" size={40} onPress={handleGoogleLogin} />
-            }
-                        {isLoading ? <ActivityIndicator size="small"  color="secondary" /> :
-             <IconButton
-             icon="github"
-             size={40}
-             onPress={() => props.navigation.navigate("Signup")}
-           />
-            }
-           
+            {isLoading ? (
+              <ActivityIndicator size="small" color="secondary" />
+            ) : (
+              <IconButton icon="google" size={40} onPress={handleGoogleLogin} />
+            )}
           </View>
         </View>
-        <TouchableNativeFeedback onPress={() => props.navigation.navigate("Signup")}>
-        <Paragraph style={styles.signUpText}>
-          Don't have an account? Sign Up
-        </Paragraph>
+        <TouchableNativeFeedback
+          onPress={() => props.navigation.navigate("Signup")}
+        >
+          <Paragraph style={styles.signUpText}>
+            Don't have an account? Sign Up
+          </Paragraph>
         </TouchableNativeFeedback>
       </ScrollView>
     </SafeAreaView>

@@ -34,7 +34,7 @@ const AppNavigator = () => {
         } // value previously stored
         else {
           const color = Appearance.getColorScheme();
-          if (color === "dark")
+          if (color == "dark")
             dispatch(updateUserTheme("darkBlue"));
           else dispatch(updateUserTheme("lightBlue"));
           dispatch(setOnboarding(false));
