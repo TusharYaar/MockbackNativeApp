@@ -20,7 +20,7 @@ const RouteHistoryDetailScreen = ({ route }) => {
   const { routeId } = route.params;
   const { colors } = useTheme();
   const routeDetail = useSelector((state) =>
-    state.mockspaces.currentMockspace.routeHistory.find(
+    state.mockspaces.currentMockspace.routeHistory?.find(
       (route) => route._id === routeId
     )
   );

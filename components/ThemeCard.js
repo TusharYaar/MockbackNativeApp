@@ -7,7 +7,6 @@ import Images from "../data/themeImages"
 
 const windowWidth = Dimensions.get('window').width;
 const ThemeCard = ({theme}) => {
-    // console.log(`${theme.label}: require("../assets/themes/Theme_${theme.label}.png"),`)
     return (
         <View style={styles.card}>
             <View style={[styles.container]}>

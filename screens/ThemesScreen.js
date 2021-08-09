@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 
-import { StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
+import { StyleSheet, View, FlatList, Dimensions } from "react-native";
 
 import Themes from "../data/themes";
 
@@ -53,7 +53,6 @@ const ThemesScreen = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
         onMomentumScrollEnd={updateCurrentSlideIndex}
-        style={styles.list}
         data={Themes}
         keyExtractor={(item) => item.label}
         renderItem={({ item }) => <ThemeCard theme={item} />}

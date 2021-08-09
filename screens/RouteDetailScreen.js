@@ -24,7 +24,7 @@ const windowWidth = Dimensions.get("window").width;
 const RouteDetailScreen = ({ route, navigation }) => {
   const routeId = route.params.routeId;
   const routeDetail = useSelector((state) =>
-    state.mockspaces.currentMockspace.routes.find(
+    state.mockspaces.currentMockspace.routes?.find(
       (route) => route._id === routeId
     )
   );

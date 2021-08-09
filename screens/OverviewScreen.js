@@ -53,7 +53,6 @@ const OverviewScreen = () => {
         }
       });
       return {
-        label: `/${route.pathname}`,
         data: arr,
         color: () => `${LineColors[index % (LineColors.length - 1)]}`,
         strokeWidth:1
@@ -91,7 +90,7 @@ const OverviewScreen = () => {
             <LineChart
     data={{
       labels: days,
-      datasets: lineDataset
+      datasets: lineDataset || [{data: [Math.random()*30,Math.random()*30,Math.random()*30,Math.random()*30,Math.random()*30]}]
     }}
     width={Dimensions.get("window").width - 40} // from react-native
     height={220}
@@ -135,7 +134,7 @@ const OverviewScreen = () => {
       backgroundGradientFrom: "#fb8c00",
       backgroundGradientTo: "#ffa726",
       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(255, 255, 255, 1)`,
+      labelColor: () => `rgba(255, 255, 255, 1)`,
     }}
     style={{
       marginVertical: 10,
